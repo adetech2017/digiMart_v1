@@ -50,7 +50,7 @@ class BuyerCreateView(generics.CreateAPIView):
                     'username': openapi.Schema(type=openapi.TYPE_STRING),
                     'email': openapi.Schema(type=openapi.TYPE_STRING),
                     'password': openapi.Schema(type=openapi.TYPE_STRING),
-                    'is_buyer': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+                    'is_buyer': openapi.Schema(type=openapi.TYPE_BOOLEAN, default=True),
                     # Add other user fields you want to include in the documentation
                 }),
                 'gender': openapi.Schema(type=openapi.TYPE_STRING),
@@ -61,34 +61,44 @@ class BuyerCreateView(generics.CreateAPIView):
             required=['user', 'gender', 'phone_number', 'address'],
         ),
     )
-    def post(self, request, *args, **kwargs):
-        try:
-            serializer = self.get_serializer(data=request.data)
-            serializer.is_valid(raise_exception=True)
-
-            # Encrypt the password before saving the User
-            user_data = serializer.validated_data['user']
-            user_data['password'] = make_password(user_data['password'])
-
-            # Save the User and Buyer objects in a transaction
-            with transaction.atomic():
-                user = User.objects.create(**user_data)
-                buyer_data = serializer.validated_data
-                buyer_data.pop('user')  # Remove the nested user data
-                buyer_data['user'] = user
-                buyer = Buyer.objects.create(**buyer_data)
-
+    def post(self, request, format=None):
+        serializer = BuyerSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
             response_data = {
-                #"user": serializer.data['user'],
                 "buyer": serializer.data,
             }
-
             return Response(response_data, status=status.HTTP_201_CREATED)
-        except ValidationError as ve:
-            errors = ve.detail
-            return Response({"errors": errors}, status=status.HTTP_400_BAD_REQUEST)
-        except Exception as e:
-            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    # def post(self, request, *args, **kwargs):
+    #     try:
+    #         serializer = self.get_serializer(data=request.data)
+    #         serializer.is_valid(raise_exception=True)
+
+    #         # Encrypt the password before saving the User
+    #         user_data = serializer.validated_data['user']
+    #         user_data['password'] = make_password(user_data['password'])
+
+    #         # Save the User and Buyer objects in a transaction
+    #         with transaction.atomic():
+    #             user = User.objects.create(**user_data)
+    #             buyer_data = serializer.validated_data
+    #             buyer_data.pop('user')  # Remove the nested user data
+    #             buyer_data['user'] = user
+    #             buyer = Buyer.objects.create(**buyer_data)
+
+    #         response_data = {
+    #             #"user": serializer.data['user'],
+    #             "buyer": serializer.data,
+    #         }
+
+    #         return Response(response_data, status=status.HTTP_201_CREATED)
+    #     except ValidationError as ve:
+    #         errors = ve.detail
+    #         return Response({"errors": errors}, status=status.HTTP_400_BAD_REQUEST)
+    #     except Exception as e:
+    #         return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class BuyerUpdateView(generics.RetrieveUpdateAPIView):

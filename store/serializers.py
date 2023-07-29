@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product, ProductImage, Order, OrderItem, ShippingInformation, BargainPrice
+from .models import Product, ProductImage, Order, OrderItem, ShippingInformation, BargainPrice, ProductReview
 from rest_framework import generics, permissions
 from buyer.serializers import BuyerSerializer
 
@@ -11,12 +11,19 @@ class ProductImageSerializer(serializers.ModelSerializer):
         fields = ('image',)
 
 
+class ProductReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductReview
+        fields = '__all__'
+
+
 class ProductSerializer(serializers.ModelSerializer):
     images = ProductImageSerializer(many=True, required=False)
+    reviews = ProductReviewSerializer(many=True, read_only=True)
 
     class Meta:
         model = Product
-        fields = ('id', 'vendor', 'product_name', 'description', 'price', 'quantity', 'stock', 'discount', 'product_image', 'location', 'created_at', 'updated_at', 'images')
+        fields = ('id', 'vendor', 'product_name', 'description', 'price', 'quantity', 'stock', 'discount', 'product_image', 'location', 'created_at', 'updated_at', 'images', 'reviews')
         extra_kwargs = {
             'product_image': {'required': True}  # Set product_image as required
         }

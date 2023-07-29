@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'buyer',
     'store',
     'vendor',
+    'channels',
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -86,27 +88,14 @@ WSGI_APPLICATION = 'digiMart_v1.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'digiMart_v1',
-        'HOST': 'epmis-mysql-project-do-user-7163770-0.a.db.ondigitalocean.com',
-        'PORT': '25060',
-        'USER': 'doadmin',
-        'PASSWORD': 'lewb0gd3tx5wc92d',
-
+        'USER': 'postgres',
+        'PASSWORD': '145ju08',
+        'HOST': 'localhost'
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'digiMart_v1',
-#         'USER': 'postgres',
-#         'PASSWORD': '145ju08',
-#         'HOST': 'localhost'
-#     }
-# }
 
 
 # Password validation
@@ -208,5 +197,15 @@ CORS_ALLOWED_ORIGINS = [
 SWAGGER_SETTINGS = {
     'DEFAULT_AUTO_SCHEMA_CLASS': 'drf_yasg.inspectors.SwaggerAutoSchema',
     'DEFAULT_INFO': 'import.path.to.urls.api_info',
+}
+
+# Use channels layer for routing and handling WebSocket requests
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
 }
 

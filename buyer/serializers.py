@@ -5,30 +5,37 @@ from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
+from django.contrib.auth.hashers import make_password
+
 
 User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
+    #password = serializers.CharField(write_only=True)
     class Meta:
         model = User
-        fields = ('id', 'is_active', 'is_buyer', 'first_name', 'last_name', 'username', 'email', 'created_at', 'last_login','date_joined')
         #fields = '__all__'
-        ref_name = 'BuyerUser'
-        
-        
+        fields = ('id', 'is_active', 'is_buyer', 'first_name', 'last_name', 'username', 'email', 'created_at', 'last_login','date_joined')
 
+        ref_name = 'BuyerUserSerializer'
     # Include the created_at field in the response
     created_at = serializers.DateTimeField(source='date_joined', read_only=True)
 
 
 class BuyerSerializer(serializers.ModelSerializer):
     user = UserSerializer()
-    
+
     class Meta:
         model = Buyer
-        #fields = '__all__'
-        fields = ('id','user_type', 'gender', 'phone_number', 'address', 'created_at', 'updated_at', 'user')
+        fields = ['user', 'user_type', 'gender', 'phone_number', 'last_login', 'address', 'created_at', 'updated_at']
+
+    def create(self, validated_data):
+        user_data = validated_data.pop('user')
+        user = User.objects.create_user(**user_data)
+        buyer = Buyer.objects.create(user=user, **validated_data)
+        return buyer
+
 
 
 class BuyerTokenObtainPairSerializer(serializers.Serializer):

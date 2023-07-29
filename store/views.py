@@ -1,10 +1,11 @@
 from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .models import Product, ProductImage, Order, OrderItem, ShippingInformation, BargainPrice
+from .models import Product, ProductImage, Order, OrderItem, ShippingInformation, BargainPrice, ProductReview
 from .serializers import (
     ProductSerializer, ProductImageSerializer,
-    OrderSerializer, OrderItemSerializer, ShippingInformationSerializer, BargainPriceSerializer
+    OrderSerializer, OrderItemSerializer, ShippingInformationSerializer, BargainPriceSerializer,
+    ProductReviewSerializer
 )
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
@@ -12,6 +13,7 @@ from rest_framework import generics, permissions
 from django.db.models import Q
 from django.utils.crypto import get_random_string
 import string
+
 
 
 ################ create/view product endpoint ####################
@@ -272,3 +274,8 @@ class BargainPriceValidateView(generics.RetrieveAPIView):
 
         serializer = self.get_serializer(bargain_price)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+
+class ProductReviewListCreateView(generics.ListCreateAPIView):
+    queryset = ProductReview.objects.all()
+    serializer_class = ProductReviewSerializer

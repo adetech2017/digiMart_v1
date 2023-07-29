@@ -14,10 +14,10 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
+        #fields = '__all__'
         fields = ('id', 'is_active', 'is_vendor', 'first_name', 'last_name', 'username', 'email', 'created_at', 'last_login','date_joined')
-        ref_name = 'VendorUser'
-        
 
+        ref_name = 'VendorUserSerializer'
     # Include the created_at field in the response
     created_at = serializers.DateTimeField(source='date_joined', read_only=True)
 
@@ -27,9 +27,15 @@ class VendorSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Vendor
-        fields = '__all__'
+        #fields = '__all__'
+        fields = ['user', 'user_type', 'phone_number', 'digi_number', 'company_name', 'website', 'created_at', 'updated_at']
         # You can include other fields as needed
 
+    def create(self, validated_data):
+        user_data = validated_data.pop('user')
+        user = User.objects.create_user(**user_data)
+        vendor = Vendor.objects.create(user=user, **validated_data)
+        return vendor
 
 class VendorTokenObtainPairSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=150)

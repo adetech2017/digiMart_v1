@@ -52,37 +52,58 @@ class VendorCreateView(generics.CreateAPIView):
                 'company_name': openapi.Schema(type=openapi.TYPE_STRING),
                 # Add other vendor fields you want to include in the documentation
             },
-            required=['user', 'gender', 'phone_number', 'address'],
+            required=['user', 'digi_number', 'phone_number', 'company_name'],
         ),
     )
-    def post(self, request, *args, **kwargs):
-        try:
-            serializer = self.get_serializer(data=request.data)
-            serializer.is_valid(raise_exception=True)
-
-            # Encrypt the password before saving the User
-            user_data = serializer.validated_data['user']
-            user_data['password'] = make_password(user_data['password'])
-
-            # Save the User and Vendor objects in a transaction
-            with transaction.atomic():
-                user = User.objects.create(**user_data)
-                vendor_data = serializer.validated_data
-                vendor_data.pop('user')  # Remove the nested user data
-                vendor_data['user'] = user
-                vendor = Vendor.objects.create(**vendor_data)
-
+    def post(self, request, format=None):
+        serializer = VendorSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
             response_data = {
-                #"user": serializer.data['user'],
                 "vendor": serializer.data,
             }
-
             return Response(response_data, status=status.HTTP_201_CREATED)
-        except ValidationError as ve:
-            errors = ve.detail
-            return Response({"errors": errors}, status=status.HTTP_400_BAD_REQUEST)
-        except Exception as e:
-            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    # def post(self, request, *args, **kwargs):
+    #     response = super().post(request, *args, **kwargs)
+    #     if response.status_code == 200:
+    #         vendor_data = response.data.get('user')
+    #         if vendor_data:
+    #             # Add any additional data you want to include in the response
+    #             response.data['vendor_id'] = vendor_data.get('id')
+    #             response.data['vendor_username'] = vendor_data.get('user').get('username')
+    #     return response
+
+
+    # def post(self, request, *args, **kwargs):
+    #     try:
+    #         serializer = self.get_serializer(data=request.data)
+    #         serializer.is_valid(raise_exception=True)
+
+    #         # Encrypt the password before saving the User
+    #         user_data = serializer.validated_data['user']
+    #         user_data['password'] = make_password(user_data['password'])
+
+    #         # Save the User and Vendor objects in a transaction
+    #         with transaction.atomic():
+    #             user = User.objects.create(**user_data)
+    #             vendor_data = serializer.validated_data
+    #             vendor_data.pop('user')  # Remove the nested user data
+    #             vendor_data['user'] = user
+    #             vendor = Vendor.objects.create(**vendor_data)
+
+    #         response_data = {
+    #             #"user": serializer.data['user'],
+    #             "vendor": serializer.data,
+    #         }
+
+    #         return Response(response_data, status=status.HTTP_201_CREATED)
+    #     except ValidationError as ve:
+    #         errors = ve.detail
+    #         return Response({"errors": errors}, status=status.HTTP_400_BAD_REQUEST)
+    #     except Exception as e:
+    #         return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class VendorDetailView(generics.RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated]

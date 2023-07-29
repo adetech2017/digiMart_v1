@@ -5,7 +5,8 @@ from .views import (
     OrderItemListView, OrderItemDetailView,
     ShippingInformationListView, ShippingInformationDetailView, VendorProductListView,
     VendorOrderListView, BuyerOrderListView, ProductSearchView, VendorSearchView, AllProductListView,
-    AllOrderListView, BargainPriceListCreateView, BargainPriceDetailView, BargainPriceValidateView
+    AllOrderListView, BargainPriceListCreateView, BargainPriceDetailView, BargainPriceValidateView,
+    ProductReviewListCreateView
 )
 
 
@@ -47,8 +48,11 @@ urlpatterns = [
     path('products/', AllProductListView.as_view(), name='product-list'),
     path('orders/', AllOrderListView.as_view(), name='order-list'),
     
+    # product bargain
     path('bargain-prices/', BargainPriceListCreateView.as_view(), name='bargain-price-list-create'),
     path('bargain-prices/<int:pk>/', BargainPriceDetailView.as_view(), name='bargain-price-detail'),
     path('bargain-prices/validate/<str:vourcher_code>/', BargainPriceValidateView.as_view(), name='bargain-price-validate'),
+    
+    path('review-product/', ProductReviewListCreateView.as_view(), name='product-review-list-create'),
 ]
 

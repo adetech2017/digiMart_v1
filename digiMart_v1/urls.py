@@ -13,7 +13,7 @@ schema_view = get_schema_view(
         title="People's Mart API",
         default_version='v1',
         description="Peoples mart, a place where buyers meet sellers.",
-        terms_of_service="https://www.yourapp.com/terms/",
+        terms_of_service="http://peoplestore.site:8021",
         contact=openapi.Contact(email="adeyemi879@gmail.com"),
         license=openapi.License(name="MIT License"),
     ),
@@ -27,6 +27,7 @@ urlpatterns = [
     path('api/', include('buyer.urls')),
     path('api/', include('vendor.urls')),
     path('api/', include('store.urls')),
+    path('api/', include('chat.urls')),
     # Include API documentation URL
     path('swagger(<format>\.json|\.yaml)', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

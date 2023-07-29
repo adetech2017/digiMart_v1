@@ -93,3 +93,14 @@ class BargainPrice(models.Model):
     
     def __str__(self):
         return f"{self.buyer} - {self.vendor} - {self.product} - {self.vourcher_code}"
+    
+
+class ProductReview(models.Model):
+    product = models.ForeignKey(Product, related_name='reviews', on_delete=models.CASCADE)
+    reviewer = models.ForeignKey(Buyer, related_name='reviews', on_delete=models.CASCADE)
+    review_text = models.TextField()
+    rating = models.PositiveIntegerField(default=5)  # Can use a scale of 1 to 5 or any other rating system
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.reviewer.user.username} - {self.product.product_name}"
