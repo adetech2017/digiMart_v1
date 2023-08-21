@@ -64,6 +64,10 @@ class BuyerCreateView(generics.CreateAPIView):
     def post(self, request, format=None):
         serializer = BuyerSerializer(data=request.data)
         if serializer.is_valid():
+            user_data = serializer.validated_data.get('user', {})  # Get user data if present
+            if user_data:
+                user_data['password'] = make_password(user_data.get('password', ''))  # Hash the password
+                
             serializer.save()
             response_data = {
                 "buyer": serializer.data,
@@ -205,7 +209,8 @@ class BuyerForgotPasswordView(APIView):
     
     def _get_reset_password_url(self, request, uidb64, token):
         return request.build_absolute_uri(reverse('buyer_reset_password', args=[uidb64, token]))
-    
+
+
 class BuyerResetPasswordView(APIView):
     authentication_classes = []  # Remove all authentication classes for this view
     permission_classes = [AllowAny]  # Allow anonymous access

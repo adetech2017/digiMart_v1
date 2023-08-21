@@ -1,0 +1,312 @@
+Internal Server Error: /api/vendor/auth
+Traceback (most recent call last):
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework_simplejwt/views.py", line 43, in post
+    serializer.is_valid(raise_exception=True)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/serializers.py", line 227, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/serializers.py", line 429, in run_validation
+    value = self.validate(value)
+  File "/Applications/digi/digiMart_v1/vendor/serializers.py", line 49, in validate
+    user = EmailBackend().authenticate(self.context['request'], email=email, password=password)
+  File "/Applications/digi/digiMart_v1/core/authentication_backends.py", line 11, in authenticate
+    print("Provided hashed password:", user.make_password(password))
+AttributeError: 'User' object has no attribute 'make_password'
+"POST /api/vendor/auth HTTP/1.1" 500 107454
+Internal Server Error: /api/vendor/auth
+Traceback (most recent call last):
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework_simplejwt/views.py", line 43, in post
+    serializer.is_valid(raise_exception=True)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/serializers.py", line 227, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/serializers.py", line 429, in run_validation
+    value = self.validate(value)
+  File "/Applications/digi/digiMart_v1/vendor/serializers.py", line 49, in validate
+    user = EmailBackend().authenticate(self.context['request'], email=email, password=password)
+  File "/Applications/digi/digiMart_v1/core/authentication_backends.py", line 12, in authenticate
+    print("Provided hashed password:", user.make_password(password))
+AttributeError: 'User' object has no attribute 'make_password'
+"POST /api/vendor/auth HTTP/1.1" 500 107455
+Internal Server Error: /api/vendor/auth
+Traceback (most recent call last):
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework_simplejwt/views.py", line 43, in post
+    serializer.is_valid(raise_exception=True)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/serializers.py", line 227, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/serializers.py", line 429, in run_validation
+    value = self.validate(value)
+  File "/Applications/digi/digiMart_v1/vendor/serializers.py", line 49, in validate
+    user = EmailBackend().authenticate(self.context['request'], email=email, password=password)
+  File "/Applications/digi/digiMart_v1/core/authentication_backends.py", line 13, in authenticate
+    print("Provided hashed password:", user.make_password(password))
+AttributeError: 'User' object has no attribute 'make_password'
+"POST /api/vendor/auth HTTP/1.1" 500 107422
+Internal Server Error: /api/vendor/auth
+Traceback (most recent call last):
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework_simplejwt/views.py", line 43, in post
+    serializer.is_valid(raise_exception=True)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/serializers.py", line 227, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/serializers.py", line 429, in run_validation
+    value = self.validate(value)
+  File "/Applications/digi/digiMart_v1/vendor/serializers.py", line 49, in validate
+    user = EmailBackend().authenticate(self.context['request'], email=email, password=password)
+  File "/Applications/digi/digiMart_v1/core/authentication_backends.py", line 13, in authenticate
+    print("Provided hashed password:", user.make_password(password))
+AttributeError: 'User' object has no attribute 'make_password'
+"POST /api/vendor/auth HTTP/1.1" 500 107500
+Internal Server Error: /api/vendor/auth
+Traceback (most recent call last):
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework_simplejwt/views.py", line 43, in post
+    serializer.is_valid(raise_exception=True)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/serializers.py", line 227, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/serializers.py", line 429, in run_validation
+    value = self.validate(value)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework_simplejwt/serializers.py", line 68, in validate
+    data = super().validate(attrs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework_simplejwt/serializers.py", line 49, in validate
+    self.user = authenticate(**authenticate_kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/views/decorators/debug.py", line 42, in sensitive_variables_wrapper
+    return func(*func_args, **func_kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/contrib/auth/__init__.py", line 68, in authenticate
+    for backend, backend_path in _get_backends(return_tuples=True):
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/contrib/auth/__init__.py", line 27, in _get_backends
+    backend = load_backend(backend_path)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/contrib/auth/__init__.py", line 21, in load_backend
+    return import_string(path)()
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/utils/module_loading.py", line 30, in import_string
+    return cached_import(module_path, class_name)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/utils/module_loading.py", line 15, in cached_import
+    module = import_module(module_path)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1004, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'core.authentication'
+"POST /api/vendor/auth HTTP/1.1" 500 139735
+Internal Server Error: /api/vendor/auth
+Traceback (most recent call last):
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework_simplejwt/views.py", line 43, in post
+    serializer.is_valid(raise_exception=True)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/serializers.py", line 227, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/serializers.py", line 429, in run_validation
+    value = self.validate(value)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework_simplejwt/serializers.py", line 68, in validate
+    data = super().validate(attrs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework_simplejwt/serializers.py", line 49, in validate
+    self.user = authenticate(**authenticate_kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/views/decorators/debug.py", line 42, in sensitive_variables_wrapper
+    return func(*func_args, **func_kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/contrib/auth/__init__.py", line 68, in authenticate
+    for backend, backend_path in _get_backends(return_tuples=True):
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/contrib/auth/__init__.py", line 27, in _get_backends
+    backend = load_backend(backend_path)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/contrib/auth/__init__.py", line 21, in load_backend
+    return import_string(path)()
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/utils/module_loading.py", line 30, in import_string
+    return cached_import(module_path, class_name)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/utils/module_loading.py", line 15, in cached_import
+    module = import_module(module_path)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1004, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'digiMart_v1.authentication'
+"POST /api/vendor/auth HTTP/1.1" 500 139875
+Internal Server Error: /api/vendor/auth
+Traceback (most recent call last):
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework_simplejwt/views.py", line 43, in post
+    serializer.is_valid(raise_exception=True)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/serializers.py", line 227, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/serializers.py", line 429, in run_validation
+    value = self.validate(value)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework_simplejwt/serializers.py", line 68, in validate
+    data = super().validate(attrs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework_simplejwt/serializers.py", line 49, in validate
+    self.user = authenticate(**authenticate_kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/views/decorators/debug.py", line 42, in sensitive_variables_wrapper
+    return func(*func_args, **func_kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/contrib/auth/__init__.py", line 68, in authenticate
+    for backend, backend_path in _get_backends(return_tuples=True):
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/contrib/auth/__init__.py", line 27, in _get_backends
+    backend = load_backend(backend_path)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/contrib/auth/__init__.py", line 21, in load_backend
+    return import_string(path)()
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/utils/module_loading.py", line 30, in import_string
+    return cached_import(module_path, class_name)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/utils/module_loading.py", line 15, in cached_import
+    module = import_module(module_path)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1004, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'core.authentication'
+"POST /api/vendor/auth HTTP/1.1" 500 139735
+Internal Server Error: /api/vendor/auth
+Traceback (most recent call last):
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/request.py", line 74, in wrap_attributeerrors
+    yield
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/request.py", line 227, in user
+    self._authenticate()
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/request.py", line 380, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+  File "/Applications/digi/digiMart_v1/core/authentication_backends.py", line 13, in authenticate
+    print("Stored hashed password:", user.password)
+AttributeError: 'NoneType' object has no attribute 'password'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 414, in initial
+    self.perform_authentication(request)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/views.py", line 324, in perform_authentication
+    request.user
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/request.py", line 226, in user
+    with wrap_attributeerrors():
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/request.py", line 78, in wrap_attributeerrors
+    raise exc.with_traceback(info[2])
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/request.py", line 74, in wrap_attributeerrors
+    yield
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/request.py", line 227, in user
+    self._authenticate()
+  File "/Applications/digi/digiMart_v1/.venv/lib/python3.10/site-packages/rest_framework/request.py", line 380, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+  File "/Applications/digi/digiMart_v1/core/authentication_backends.py", line 13, in authenticate
+    print("Stored hashed password:", user.password)
+rest_framework.request.WrappedAttributeError: 'NoneType' object has no attribute 'password'
+"POST /api/vendor/auth HTTP/1.1" 500 136583

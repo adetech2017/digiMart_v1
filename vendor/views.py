@@ -24,7 +24,8 @@ from django.urls import reverse
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from rest_framework.views import APIView
-
+from django.contrib.auth.backends import ModelBackend
+from core.authentication_backends import EmailBackend
 
 
 
@@ -41,23 +42,27 @@ class VendorCreateView(generics.CreateAPIView):
                 'user': openapi.Schema(type=openapi.TYPE_OBJECT, properties={
                     'first_name': openapi.Schema(type=openapi.TYPE_STRING),
                     'last_name': openapi.Schema(type=openapi.TYPE_STRING),
-                    'username': openapi.Schema(type=openapi.TYPE_STRING),
                     'email': openapi.Schema(type=openapi.TYPE_STRING),
                     'password': openapi.Schema(type=openapi.TYPE_STRING),
                     'is_vendor': openapi.Schema(type=openapi.TYPE_BOOLEAN),
                     # Add other user fields you want to include in the documentation
                 }),
+                'vendor_type': openapi.Schema(type=openapi.TYPE_STRING),
                 'digi_number': openapi.Schema(type=openapi.TYPE_STRING),
                 'phone_number': openapi.Schema(type=openapi.TYPE_STRING),
                 'company_name': openapi.Schema(type=openapi.TYPE_STRING),
                 # Add other vendor fields you want to include in the documentation
             },
-            required=['user', 'digi_number', 'phone_number', 'company_name'],
+            required=['user', 'digi_number', 'vendor_type', 'phone_number', 'company_name'],
         ),
     )
     def post(self, request, format=None):
         serializer = VendorSerializer(data=request.data)
         if serializer.is_valid():
+            user_data = serializer.validated_data.get('user', {})  # Get user data if present
+            if user_data:
+                user_data['password'] = make_password(user_data.get('password', ''))  # Hash the password
+
             serializer.save()
             response_data = {
                 "vendor": serializer.data,
@@ -147,17 +152,19 @@ class VendorDetailView(generics.RetrieveUpdateAPIView):
         return Response(response_data, status=status.HTTP_200_OK)
 
 class VendorTokenObtainPairView(TokenObtainPairView):
+    authentication_classes = [EmailBackend]
     serializer_class = VendorTokenObtainPairSerializer
 
-    def post(self, request, *args, **kwargs):
-        response = super().post(request, *args, **kwargs)
-        if response.status_code == 200:
-            vendor_data = response.data.get('user')
-            if vendor_data:
-                # Add any additional data you want to include in the response
-                response.data['vendor_id'] = vendor_data.get('id')
-                response.data['vendor_username'] = vendor_data.get('user').get('username')
-        return response
+    # def post(self, request, *args, **kwargs):
+    #     response = super().post(request, *args, **kwargs)
+    #     if response.status_code == 200:
+    #         vendor_data = response.data.get('user')
+    #         print(vendor_data)
+    #         if vendor_data:
+    #             # Add any additional data you want to include in the response
+    #             response.data['vendor_id'] = vendor_data.get('id')
+    #             response.data['vendor_email'] = vendor_data.get('user').get('email')
+    #     return response
     
 class VendorForgotPasswordView(APIView):
     authentication_classes = []  # Remove all authentication classes for this view

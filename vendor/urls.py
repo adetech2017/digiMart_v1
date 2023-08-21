@@ -1,6 +1,9 @@
 from django.urls import path
 from .views import VendorCreateView, VendorDetailView, VendorTokenObtainPairView, VendorForgotPasswordView, VendorResetPasswordView, VendorListView
-
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 
 urlpatterns = [

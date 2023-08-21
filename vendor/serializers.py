@@ -4,7 +4,8 @@ from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
-from rest_framework_simplejwt.tokens import RefreshToken
+from core.authentication_backends import EmailBackend
+
 
 
 
@@ -15,7 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         #fields = '__all__'
-        fields = ('id', 'is_active', 'is_vendor', 'first_name', 'last_name', 'username', 'email', 'created_at', 'last_login','date_joined')
+        fields = ('id', 'is_active', 'is_vendor', 'first_name', 'last_name','username', 'email', 'created_at', 'last_login','date_joined')
 
         ref_name = 'VendorUserSerializer'
     # Include the created_at field in the response
@@ -23,12 +24,13 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class VendorSerializer(serializers.ModelSerializer):
+    tokens = serializers.SerializerMethodField()
     user = UserSerializer()
     
     class Meta:
         model = Vendor
         #fields = '__all__'
-        fields = ['user', 'user_type', 'phone_number', 'digi_number', 'company_name', 'website', 'created_at', 'updated_at']
+        fields = ('user', 'user_type', 'phone_number', 'digi_number', 'vendor_type', 'company_name', 'website', 'created_at', 'updated_at', 'tokens')
         # You can include other fields as needed
 
     def create(self, validated_data):
@@ -37,33 +39,61 @@ class VendorSerializer(serializers.ModelSerializer):
         vendor = Vendor.objects.create(user=user, **validated_data)
         return vendor
 
-class VendorTokenObtainPairSerializer(serializers.Serializer):
-    username = serializers.CharField(max_length=150)
-    password = serializers.CharField(max_length=128, write_only=True)
+    # def get_tokens(self, obj):
+    #     refresh = RefreshToken.for_user(obj.user)
+    #     return {
+    #         'refresh': str(refresh),
+    #         'access': str(refresh.access_token),
+    #     }
+    
+class VendorTokenObtainPairSerializer(TokenObtainPairSerializer):
+    class Meta:
+        model = Vendor
 
-    def validate(self, attrs):
-        data = super().validate(attrs)
+# class VendorTokenObtainPairSerializer(serializers.Serializer):
+#     email = serializers.EmailField()
+#     password = serializers.CharField()
 
-        # Authenticate the user
-        user = authenticate(
-            username=data['username'], 
-            password=data['password']
-        )
 
-        if user and user.vendor:
-            refresh = RefreshToken.for_user(user)
+#     def validate(self, attrs):
+#         email = attrs.get('email')
+#         password = attrs.get('password')
+#         user = EmailBackend().authenticate(self.context['request'], email=email, password=password)
+#         #print(user)
+#         if user:
+#             refresh = RefreshToken.for_user(user)
+#             return {
+#                 'refresh': str(refresh),
+#                 'access': str(refresh.access_token),
+#                 'user_id': user.id,
+#             }
+#         raise serializers.ValidationError("Invalid credentials")
+    # email = serializers.EmailField()
+    # password = serializers.CharField()
 
-            # Include vendor information in the response
-            data['refresh'] = str(refresh)
-            data['access'] = str(refresh.access_token)
-            data['vendor'] = VendorSerializer(user.vendor).data  # Serialize vendor information
+    # def validate(self, attrs):
+    #     data = super().validate(attrs)
 
-            # Remove the username and password fields from the response
-            data.pop('username', None)
-            data.pop('password', None)
-            return data
+    #     # Authenticate the user
+    #     user = authenticate(
+    #         email=data['email'], 
+    #         password=data['password']
+    #     )
 
-        raise serializers.ValidationError("Invalid credentials")
+    #     if user and user.vendor:
+    #         refresh = RefreshToken.for_user(user)
+
+    #         # Include vendor information in the response
+    #         data['refresh'] = str(refresh)
+    #         data['access'] = str(refresh.access_token)
+    #         data['vendor'] = VendorSerializer(user.vendor).data  # Serialize vendor information
+
+    #         # Remove the username and password fields from the response
+    #         data.pop('email', None)
+    #         data.pop('password', None)
+    #         return data
+
+    #     raise serializers.ValidationError("Invalid credentials")
 
 
 class VendorForgotPasswordSerializer(serializers.Serializer):

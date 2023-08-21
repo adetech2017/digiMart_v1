@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, Group
 from django.conf import settings
 from core.models import User
+from django.utils import timezone
 
 
 
@@ -12,10 +13,12 @@ class Vendor(models.Model):
         ('vendor', 'Vendor'),
     )
     
+    
     id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     user_type = models.CharField(max_length=20, choices=USER_TYPE_CHOICES, default='vendor')
-    digi_number = models.CharField(max_length=100, null=True, blank=True)
+    vendor_type = models.CharField(max_length=20, default='merchant')
+    digi_number = models.CharField(max_length=20, unique=True)
     company_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
     alt_phone = models.CharField(max_length=20, null=True, blank=True)
@@ -41,8 +44,8 @@ class Vendor(models.Model):
             ("read_vendor", "Can read vendor details"),
             ("update", "Can update vendor details"),
         )
-
+    
     def __str__(self):
-        return self.username
+        return self.user_type
 
 
